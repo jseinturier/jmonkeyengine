@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012, 2016, 2018 jMonkeyEngine
+ * Copyright (c) 2009-2012, 2016, 2018-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -158,6 +158,7 @@ public class AudioNode extends Node implements AudioSource {
      *
      * @deprecated Use {@link AudioNode#AudioNode(com.jme3.asset.AssetManager, java.lang.String, com.jme3.audio.AudioData.DataType)} instead
      */
+    @Deprecated
     public AudioNode(AssetManager assetManager, String name, boolean stream, boolean streamCache) {
         this.audioKey = new AudioKey(name, stream, streamCache);
         this.data = (AudioData) assetManager.loadAsset(audioKey);
@@ -173,6 +174,7 @@ public class AudioNode extends Node implements AudioSource {
      *
      * @deprecated Use {@link AudioNode#AudioNode(com.jme3.asset.AssetManager, java.lang.String, com.jme3.audio.AudioData.DataType)} instead
      */
+    @Deprecated
     public AudioNode(AssetManager assetManager, String name, boolean stream) {
         this(assetManager, name, stream, true); // Always streamCached
     }
@@ -186,6 +188,7 @@ public class AudioNode extends Node implements AudioSource {
      *
      * @deprecated AudioRenderer parameter is ignored.
      */
+    @Deprecated
     public AudioNode(AudioRenderer audioRenderer, AssetManager assetManager, String name) {
         this(assetManager, name, DataType.Buffer);
     }
@@ -197,6 +200,7 @@ public class AudioNode extends Node implements AudioSource {
      * @param name The filename of the audio file
      * @deprecated Use {@link AudioNode#AudioNode(com.jme3.asset.AssetManager, java.lang.String, com.jme3.audio.AudioData.DataType) } instead
      */
+    @Deprecated
     public AudioNode(AssetManager assetManager, String name) {
         this(assetManager, name, DataType.Buffer);
     }
@@ -299,7 +303,7 @@ public class AudioNode extends Node implements AudioSource {
      */
     public void setAudioData(AudioData audioData, AudioKey audioKey) {
         if (data != null) {
-            throw new IllegalStateException("Cannot change data once its set");
+            throw new IllegalStateException("Cannot change data once it's set");
         }
 
         data = audioData;
@@ -490,7 +494,7 @@ public class AudioNode extends Node implements AudioSource {
     /**
      * Set to true to enable reverberation effects for this audio node.
      * Does nothing if the audio node is not positional.
-     * <br/>
+     * <br>
      * When enabled, the audio environment set with
      * {@link AudioRenderer#setEnvironment(com.jme3.audio.Environment) }
      * will apply a reverb effect to the audio playing from this audio node.
@@ -722,7 +726,7 @@ public class AudioNode extends Node implements AudioSource {
     @Override
     public void updateGeometricState() {
         super.updateGeometricState();
-        if (channel < 0 || this.getParent() == null) return;
+        if (channel < 0) return;
         Vector3f currentWorldTranslation = worldTransform.getTranslation();
         if (!previousWorldTranslation.equals(currentWorldTranslation)) {
             getRenderer().updateSourceParam(this, AudioParam.Position);

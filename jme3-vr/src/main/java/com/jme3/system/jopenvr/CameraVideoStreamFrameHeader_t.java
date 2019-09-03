@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class CameraVideoStreamFrameHeader_t extends Structure {
 	/**
-	 * @see EVRTrackedCameraFrameType<br>
 	 * C type : EVRTrackedCameraFrameType
 	 */
 	public int eFrameType;
@@ -28,7 +27,7 @@ public class CameraVideoStreamFrameHeader_t extends Structure {
 		return Arrays.asList("eFrameType", "nWidth", "nHeight", "nBytesPerPixel", "nFrameSequence", "standingTrackedDevicePose");
 	}
 	/**
-	 * @param eFrameType @see EVRTrackedCameraFrameType<br>
+	 * @param eFrameType @see JOpenVRLibrary.EVRTrackedCameraFrameType <br>
 	 * C type : EVRTrackedCameraFrameType<br>
 	 * @param standingTrackedDevicePose C type : TrackedDevicePose_t
 	 */

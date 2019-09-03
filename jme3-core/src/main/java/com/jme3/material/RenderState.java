@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -272,27 +272,27 @@ public class RenderState implements Cloneable, Savable {
         /**
          * Additive blending. For use with glows and particle emitters.
          * <p>
-         * Result = Source Color + Destination Color -> (GL_ONE, GL_ONE)
+         * Result = Source Color + Destination Color -&gt; (GL_ONE, GL_ONE)
          */
         Additive,
         /**
          * Premultiplied alpha blending, for use with premult alpha textures.
          * <p>
-         * Result = Source Color + (Dest Color * (1 - Source Alpha) ) -> (GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
+         * Result = Source Color + (Dest Color * (1 - Source Alpha) ) -&gt; (GL_ONE, GL_ONE_MINUS_SRC_ALPHA)
          */
         PremultAlpha,
         /**
          * Additive blending that is multiplied with source alpha.
          * For use with glows and particle emitters.
          * <p>
-         * Result = (Source Alpha * Source Color) + Dest Color -> (GL_SRC_ALPHA, GL_ONE)
+         * Result = (Source Alpha * Source Color) + Dest Color -&gt; (GL_SRC_ALPHA, GL_ONE)
          */
         AlphaAdditive,
         /**
          * Color blending, blends in color from dest color
          * using source color.
          * <p>
-         * Result = Source Color + (1 - Source Color) * Dest Color -> (GL_ONE, GL_ONE_MINUS_SRC_COLOR)
+         * Result = Source Color + (1 - Source Color) * Dest Color -&gt; (GL_ONE, GL_ONE_MINUS_SRC_COLOR)
          */
         Color,
         /**
@@ -300,26 +300,37 @@ public class RenderState implements Cloneable, Savable {
          * using source alpha.
          * <p>
          * Result = Source Alpha * Source Color +
-         *          (1 - Source Alpha) * Dest Color -> (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+         *          (1 - Source Alpha) * Dest Color -&gt; (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
          */
         Alpha,
+         /**
+         * Alpha blending, interpolates to source color from dest color
+         * using source alpha.
+         * The resulting alpha is the sum between the source alpha and the destination alpha.
+         * <p>
+         * Result.rgb = Source Alpha * Source Color +
+         *          (1 - Source Alpha) * Dest Color -&gt; (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+         * Result.a = 1 * Source Alpha + 1 * Dest Alpha -&gt; (GL_ONE, GL_ONE)
+         * 
+         */
+        AlphaSumA,
         /**
          * Multiplies the source and dest colors.
          * <p>
-         * Result = Source Color * Dest Color -> (GL_DST_COLOR, GL_ZERO)
+         * Result = Source Color * Dest Color -&gt; (GL_DST_COLOR, GL_ZERO)
          */
         Modulate,
         /**
          * Multiplies the source and dest colors then doubles the result.
          * <p>
-         * Result = 2 * Source Color * Dest Color -> (GL_DST_COLOR, GL_SRC_COLOR)
+         * Result = 2 * Source Color * Dest Color -&gt; (GL_DST_COLOR, GL_SRC_COLOR)
          */
         ModulateX2,
         /**
          * Opposite effect of Modulate/Multiply. Invert both colors, multiply and
          * then invert the result.
          * <p>
-         * Result = 1 - (1 - Source Color) * (1 - Dest Color) -> (GL_ONE, GL_ONE_MINUS_SRC_COLOR)
+         * Result = 1 - (1 - Source Color) * (1 - Dest Color) -&gt; (GL_ONE, GL_ONE_MINUS_SRC_COLOR)
          */
         Screen,
         /**
@@ -327,7 +338,7 @@ public class RenderState implements Cloneable, Savable {
          * operation.  This is directly equivalent to Photoshop's "Exclusion" blend.
          * <p>
          * Result = (Source Color * (1 - Dest Color)) + (Dest Color * (1 - Source Color))
-         *  -> (GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_COLOR) 
+         *  -&gt; (GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_COLOR) 
          */
         Exclusion,
         /**
@@ -975,7 +986,8 @@ public class RenderState implements Cloneable, Savable {
 
     /**
      * Sets the mesh line width.
-     * This is to use in conjunction with {@link #setWireframe(boolean)} or with a mesh in {@link Mesh.Mode#Lines} mode.
+     * Use this in conjunction with {@link #setWireframe(boolean)} or with a mesh in
+     * {@link com.jme3.scene.Mesh.Mode#Lines} mode.
      * @param lineWidth the line width.
      */
     public void setLineWidth(float lineWidth) {
@@ -1230,6 +1242,7 @@ public class RenderState implements Cloneable, Savable {
      * material parameter.
      * @return false
      */
+    @Deprecated
     public boolean isAlphaTest() {
         return false;
     }

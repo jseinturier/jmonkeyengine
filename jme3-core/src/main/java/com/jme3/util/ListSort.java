@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,12 +52,13 @@ import java.util.Comparator;
  * for optimal performance, but can be called several times if the length of the
  * list changes
  *
+ * {@code
  * Disclaimer : I was intrigued by the use of val >>> 1 in java 7 Timsort class
  * instead of val / 2 (integer division). Micro benching revealed that val >>> 1
  * is twice faster than val / 2 in java 6 and has similar perf in java 7. The
  * following code uses val >>> 1 when ever a value needs to be divided by 2 and
  * rounded to its floor
- *
+ * }
  *
  * @author Nehon
  */
@@ -66,7 +67,7 @@ public class ListSort<T> {
     /**
      * Threshold for binary sort vs merge. Original algorithm use 64, java7
      * TimSort uses 32 and I used 128, see this post for explanations :
-     * http://hub.jmonkeyengine.org/groups/development-discussion-jme3/forum/topic/i-got-that-sorted-out-huhuhu/
+     * https://hub.jmonkeyengine.org/t/i-got-that-sorted-out-huhuhu/24478
      */
     private static final int MIN_SIZE = 128;
     private T[] array;
@@ -451,7 +452,7 @@ public class ListSort<T> {
         /* Where does B start in A?  Elements in A before that can be
          * ignored (already in place).
          */
-        //didn't find proper naming for k as it's used inthe original implementation
+        //didn't find proper naming for k as it's used in the original implementation
         int k = gallopRight(array[indexB], array, indexA, lenA, 0, comparator);        
         indexA += k;
         lenA -= k;
@@ -771,7 +772,7 @@ public class ListSort<T> {
                     /* lengthA==0 is impossible now if the comparison
                     * function is consistent, but we can't assume
                     * that it is.
-                    * a propper error will be thrown in mergeLow if lengthA == 0
+                    * a proper error will be thrown in mergeLow if lengthA == 0
                     */
                     if (lengthA <= 1){
                         return;
@@ -942,7 +943,7 @@ public class ListSort<T> {
                     /* lengthB==0 is impossible now if the comparison
                     * function is consistent, but we can't assume
                     * that it is.
-                    * a propper error will be thrown in mergeLow if lengthB == 0
+                    * a proper error will be thrown in mergeLow if lengthB == 0
                     */
                     if (lengthB <= 1){
                         return;

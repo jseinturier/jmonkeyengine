@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,6 +32,7 @@
 package com.jme3.app.state;
  
 import com.jme3.app.Application;
+import com.jme3.profile.AppProfiler;
 import com.jme3.renderer.RenderManager;
 import com.jme3.util.SafeArrayList;
 import java.util.Arrays;
@@ -230,7 +231,7 @@ public class AppStateManager {
                 }
             }
             
-            // This may be more trouble than its worth but I think
+            // This may be more trouble than it's worth but I think
             // it's necessary for proper decoupling of states and provides
             // similar behavior to before where a state could be looked
             // up even if it wasn't initialized. -pspeed
@@ -300,6 +301,9 @@ public class AppStateManager {
         AppState[] array = getStates();
         for (AppState state : array){
             if (state.isEnabled()) {
+                if (app.getAppProfiler() != null) {
+                    app.getAppProfiler().appSubStep(state.getClass().getSimpleName());
+                }
                 state.update(tpf);
             }
         }

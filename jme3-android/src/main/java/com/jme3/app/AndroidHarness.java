@@ -3,7 +3,6 @@ package com.jme3.app;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.opengl.GLSurfaceView;
@@ -89,7 +88,7 @@ public class AndroidHarness extends Activity implements TouchListener, DialogInt
     protected int eglStencilBits = 0;
 
     /**
-     * Set the desired frame rate.  If frameRate > 0, the application
+     * Set the desired frame rate.  If frameRate higher than 0, the application
      * will be capped at the desired frame rate.
      * (default = -1, no frame rate cap)
      */

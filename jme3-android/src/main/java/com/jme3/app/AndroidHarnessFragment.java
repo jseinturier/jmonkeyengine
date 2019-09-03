@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2015 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -116,7 +116,7 @@ public class AndroidHarnessFragment extends Fragment implements
     protected int eglStencilBits = 0;
 
     /**
-     * Set the desired frame rate.  If frameRate > 0, the application
+     * Set the desired frame rate.  If frameRate higher than 0, the application
      * will be capped at the desired frame rate.
      * (default = -1, no frame rate cap)
      */
@@ -125,11 +125,11 @@ public class AndroidHarnessFragment extends Fragment implements
     /**
      * Set the maximum resolution for the surfaceview in either the
      * width or height screen direction depending on the screen size.
-     * If the surfaceview is retangular, the longest side (width or height)
+     * If the surfaceview is rectangular, the longest side (width or height)
      * will have the resolution set to a maximum of maxResolutionDimension.
      * The other direction will be set to a value that maintains the aspect
      * ratio of the surfaceview. </br>
-     * Any value < 0 (default = -1) will result in the surfaceview having the
+     * Any value less than 0 (default = -1) will result in the surfaceview having the
      * same resolution as the view layout (ie. no max resolution).
      */
     protected int maxResolutionDimension = -1;
@@ -276,17 +276,17 @@ public class AndroidHarnessFragment extends Fragment implements
     }
 
     /**
-     * Called by the system to create the View hierchy associated with this
+     * Called by the system to create the View hierarchy associated with this
      * Fragment.  For jME, this is a FrameLayout that contains the GLSurfaceView
      * and an overlaying SplashScreen Image (if used).  The View that is returned
-     * will be placed on the screen within the boundries of the View borders defined
+     * will be placed on the screen within the boundaries of the View borders defined
      * by the Activity's layout parameters for this Fragment.  For jME, we also
      * update the application reference to the new view.
      *
      * @param inflater
      * @param container
      * @param savedInstanceState
-     * @return
+     * @return the new view
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

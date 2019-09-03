@@ -17,7 +17,6 @@ public class TrackedDevicePose_t extends Structure {
 	/** C type : HmdVector3_t */
 	public HmdVector3_t vAngularVelocity;
 	/**
-	 * @see ETrackingResult<br>
 	 * C type : ETrackingResult
 	 */
 	public int eTrackingResult;
@@ -33,7 +32,7 @@ public class TrackedDevicePose_t extends Structure {
 	 * @param mDeviceToAbsoluteTracking C type : HmdMatrix34_t<br>
 	 * @param vVelocity C type : HmdVector3_t<br>
 	 * @param vAngularVelocity C type : HmdVector3_t<br>
-	 * @param eTrackingResult @see ETrackingResult<br>
+	 * @param eTrackingResult @see JOpenVRLibrary.ETrackingResult <br>
 	 * C type : ETrackingResult
 	 */
 	public TrackedDevicePose_t(HmdMatrix34_t mDeviceToAbsoluteTracking, HmdVector3_t vVelocity, HmdVector3_t vAngularVelocity, int eTrackingResult, byte bPoseIsValid, byte bDeviceIsConnected) {

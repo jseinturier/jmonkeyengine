@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -788,6 +788,14 @@ public final class GLRenderer implements Renderer {
                     break;
                 case Alpha:
                     blendFunc(RenderState.BlendFunc.Src_Alpha, RenderState.BlendFunc.One_Minus_Src_Alpha);
+                    break;
+                case AlphaSumA:
+                    blendFuncSeparate(
+                        RenderState.BlendFunc.Src_Alpha, 
+                        RenderState.BlendFunc.One_Minus_Src_Alpha,
+                        RenderState.BlendFunc.One,
+                        RenderState.BlendFunc.One                    
+                    );
                     break;
                 case PremultAlpha:
                     blendFunc(RenderState.BlendFunc.One, RenderState.BlendFunc.One_Minus_Src_Alpha);
@@ -1641,7 +1649,7 @@ public final class GLRenderer implements Renderer {
             default:
                 //Programming error; will fail on all hardware
                 throw new IllegalStateException("Some video driver error "
-                        + "or programming error occured. "
+                        + "or programming error occurred. "
                         + "Framebuffer object status is invalid. ");
         }
     }
@@ -2821,7 +2829,7 @@ public final class GLRenderer implements Renderer {
                 // OK: Works on all platforms.
                 break;
             case UnsignedInt:
-                // Requres extension on OpenGL ES 2.
+                // Requires extension on OpenGL ES 2.
                 if (!caps.contains(Caps.IntegerIndexBuffer)) {
                     throw new RendererException("32-bit index buffers are not supported by the video hardware");
                 }
@@ -3127,5 +3135,18 @@ public final class GLRenderer implements Renderer {
     @Override
     public boolean isTaskResultAvailable(int taskId) {
         return gl.glGetQueryObjectiv(taskId, GL.GL_QUERY_RESULT_AVAILABLE) == 1;
+    }
+    @Override
+    public boolean getAlphaToCoverage() {
+        if (caps.contains(Caps.Multisample)) {
+            return gl.glIsEnabled(GLExt.GL_SAMPLE_ALPHA_TO_COVERAGE_ARB);
+
+        }
+        return false;
+    }
+
+    @Override
+    public int getDefaultAnisotropicFilter() {
+        return this.defaultAnisotropicFilter;
     }
 }

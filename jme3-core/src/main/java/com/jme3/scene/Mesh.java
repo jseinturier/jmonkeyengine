@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +50,6 @@ import com.jme3.util.clone.JmeCloneable;
 import java.io.IOException;
 import java.nio.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * <code>Mesh</code> is used to store rendering data.
@@ -1457,7 +1456,7 @@ public class Mesh implements Savable, Cloneable, JmeCloneable {
     /**
      * @deprecated use isAnimatedByJoint
      * @param boneIndex
-     * @return
+     * @return true if animated by that bone, otherwise false
      */
     @Deprecated
     public boolean isAnimatedByBone(int boneIndex) {
@@ -1513,7 +1512,7 @@ public class Mesh implements Savable, Cloneable, JmeCloneable {
 
     /**
      * Gets the amount of vertices used for each patch;
-     * @return
+     * @return the count (&ge;0)
      */
     public int getPatchVertexCount() {
         return patchVertexCount;
@@ -1530,9 +1529,45 @@ public class Mesh implements Savable, Cloneable, JmeCloneable {
     public MorphTarget[] getMorphTargets() {
         return morphTargets.getArray();
     }
+    
+    /**
+     * Get the name of all morphs in order.
+     * Morphs without names will be null
+     * @return an array
+     */
+    public String[] getMorphTargetNames() {
+        
+        MorphTarget[] nbMorphTargets = getMorphTargets();
+        if (nbMorphTargets.length == 0) {
+            return new String[0];
+        }
+        String[] targets = new String[nbMorphTargets.length];
+
+        for (int index = 0; index < nbMorphTargets.length; index++) {
+            targets[index] = nbMorphTargets[index].getName();
+        }
+        return targets;
+    }
 
     public boolean hasMorphTargets() {
         return morphTargets != null && !morphTargets.isEmpty();
+    }
+    
+    /**
+     * Get the index of the morph that has the given name.
+     * @param morphName The name of the morph to search for
+     * @return The index of the morph, or -1 if not found. 
+     */
+    public int getMorphIndex(String morphName) {
+        int index = -1;
+        MorphTarget[] nbMorphTargets = getMorphTargets();
+        for (int i = 0; i < nbMorphTargets.length; i++) {
+            if (nbMorphTargets[i].getName().equals(morphName)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 
     @Override

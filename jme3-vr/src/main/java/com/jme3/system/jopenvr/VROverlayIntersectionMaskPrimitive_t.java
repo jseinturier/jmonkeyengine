@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class VROverlayIntersectionMaskPrimitive_t extends Structure {
 	/**
-	 * @see EVROverlayIntersectionMaskPrimitiveType<br>
 	 * C type : EVROverlayIntersectionMaskPrimitiveType
 	 */
 	public int m_nPrimitiveType;
@@ -24,7 +23,7 @@ public class VROverlayIntersectionMaskPrimitive_t extends Structure {
 		return Arrays.asList("m_nPrimitiveType", "m_Primitive");
 	}
 	/**
-	 * @param m_nPrimitiveType @see EVROverlayIntersectionMaskPrimitiveType<br>
+	 * @param m_nPrimitiveType @see JOpenVRLibrary.EVROverlayIntersectionMaskPrimitiveType <br>
 	 * C type : EVROverlayIntersectionMaskPrimitiveType<br>
 	 * @param m_Primitive C type : VROverlayIntersectionMaskPrimitive_Data_t
 	 */

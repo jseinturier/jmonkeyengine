@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2018 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -157,7 +157,7 @@ public class CrossHatchFilter extends Filter {
     }
 
     /**
-     * Sets line/paper color ratio for areas with values < luminance5,
+     * Sets line/paper color ratio for areas with values less than luminance5,
      * really dark areas get no lines but a filled blob instead
      * @param fillValue 
      */
@@ -219,7 +219,7 @@ public class CrossHatchFilter extends Filter {
 
     /**
      * Returns line color
-     * @return 
+     * @return the pre-existing instance
      */
     public ColorRGBA getLineColor() {
         return lineColor;
@@ -227,7 +227,7 @@ public class CrossHatchFilter extends Filter {
 
     /**
      * Returns paper background color
-     * @return 
+     * @return the pre-existing instance
      */
     public ColorRGBA getPaperColor() {
         return paperColor;

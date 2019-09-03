@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2012 jMonkeyEngine
+ * Copyright (c) 2009-2019 jMonkeyEngine
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -169,7 +169,7 @@ public final class Technique {
     /**
      * Get the {@link DefineList} for dynamic defines.
      * 
-     * Dynamic defines are used to implement material parameter -> define
+     * Dynamic defines are used to implement material parameter -- define
      * bindings as well as {@link TechniqueDefLogic} specific functionality.
      * 
      * @return all dynamic defines.
@@ -183,7 +183,7 @@ public final class Technique {
      *
      * @deprecated Preset defines are precompiled into
      * {@link TechniqueDef#getShaderPrologue()}, whereas dynamic defines are
-     * available via {@link #getParamDefines()}.
+     * available via {@link #getDynamicDefines()}.
      */
     @Deprecated
     public DefineList getAllDefines() {
